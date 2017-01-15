@@ -1,0 +1,137 @@
+html {
+  margin: 5px;
+  padding: 5px;
+}
+
+body {
+  font-family: Verdana, Helvetica, Arial, sans-serif;
+  font-size: 110%;
+}
+
+#chat-container {
+  text-align: center;
+}
+
+#tui-container {
+  font-size: larger;
+  background-color: blue;
+  color: spin(blue, 180);
+  border: none;
+  cursor: default;
+}
+
+body.theme_blue {
+  background-color: blue;
+  color: spin(blue, 180);
+}
+
+body.theme_red {
+  background-color: red;
+  color: spin(red, 180);
+}
+
+#index {
+  text-align: center;
+
+  #button_blue {
+    background-color: blue;
+    color: spin(blue, 180);
+  }
+  #button_red {
+    background-color: red;
+    color: spin(red, 180);
+  }
+
+}
+
+#tui-container {
+  top: 10%;
+  left: 10%;
+}
+
+#content-container {
+  padding-top: 70px;
+}
+
+.mills_field(@top, @left) {
+  position: absolute;
+  top: @top;
+  left: @left;
+}
+
+#gamefield {
+  position: relative;
+  min-width: 350px;
+  .mills_fields1 {
+    .mills_field(0%, 0%);
+  }
+  .mills_fields2 {
+    .mills_field(0%, 45%);
+  }
+  .mills_fields3 {
+    .mills_field(0%, 88%);
+  }
+  .mills_fields4 {
+    .mills_field(17%, 17%);
+  }
+  .mills_fields5 {
+    .mills_field(17%, 45%);
+  }
+  .mills_fields6 {
+    .mills_field(17%, 72%);
+  }
+  .mills_fields7 {
+    .mills_field(33%, 33%);
+  }
+  .mills_fields8 {
+    .mills_field(33%, 45%);
+  }
+  .mills_fields9 {
+    .mills_field(33%, 57%);
+  }
+  .mills_fields10 {
+    .mills_field(45%, 0%);
+  }
+  .mills_fields11 {
+    .mills_field(45%, 17%);
+  }
+  .mills_fields12 {
+    .mills_field(45%, 33%);
+  }
+  .mills_fields13 {
+    .mills_field(45%, 57%);
+  }
+  .mills_fields14 {
+    .mills_field(45%, 72%);
+  }
+  .mills_fields15 {
+    .mills_field(45%, 88%);
+  }
+  .mills_fields16 {
+    .mills_field(57%, 33%);
+  }
+  .mills_fields17 {
+    .mills_field(57%, 45%);
+  }
+  .mills_fields18 {
+    .mills_field(57%, 57%);
+  }
+  .mills_fields19 {
+    .mills_field(74%, 17%);
+  }
+  .mills_fields20 {
+    .mills_field(74%, 45%);
+  }
+  .mills_fields21 {
+    .mills_field(74%, 72%);
+  }
+  .mills_fields22 {
+    .mills_field(92%, 0%);
+  }
+  .mills_fields23 {
+    .mills_field(92%, 45%);
+  }
+  .mills_fields24 {
+    .mills_field(92%, 88%);
+  }
+}

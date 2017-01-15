@@ -1,0 +1,47 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../../bower_components/paper-fab/paper-fab.html">
+
+<dom-module id="morris-app">
+  <template>
+    <style is="custom-style">
+      paper-fab {
+        height: 10px;
+        width: 10px;
+      }
+      paper-fab.w {
+        --paper-fab-background: var(--paper-grey-50);
+        --paper-fab-keyboard-focus-background: var(--paper-green-900);
+      }
+      paper-fab.s {
+        --paper-fab-background: var(--paper-grey-900);
+        --paper-fab-keyboard-focus-background: var(--paper-light-blue-900);
+      }
+      paper-fab.n {
+        --paper-fab-background: var(--paper-grey-900);
+        opacity: 0.0;
+      }
+    </style>
+
+    <paper-fab icon="favorite" title="white" class$="{{color}}"></paper-fab>
+
+  </template>
+
+  <script>
+    Polymer({
+
+      is: 'morris-app',
+
+      properties: {
+          vertex: {
+              type: String,
+              value: "0"
+          },
+          color: {
+              type: String,
+              value: "black"
+          }
+      },
+    });
+  </script>
+</dom-module>
