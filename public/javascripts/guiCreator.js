@@ -8,7 +8,8 @@ var socket = new WS('ws://localhost:9000/ws');
 var poly_list = {};
 
 $(document).ready(function () {
-    socket.onmessage = updateGui
+
+    socket.onmessage = updateGui;
     var gamefield = $("#gamefield");
     for(var i = 1; i <=24; i++) {
         var div = document.createElement('div');
@@ -32,9 +33,15 @@ function sendMessage(type, data) {
 
 function updateGui(event) {
     var json = JSON.parse(event.data);
-    var data = JSON.parse(json["data"]);
-    $.each(data, function (index, value) {
-        poly_list[index].setAttribute("color", value);
-    });
-    Polymer.updateStyles();
+    var type = json["type"];
+    if (type === "update") {
+        var data = JSON.parse(json["data"]);
+        $.each(data, function (index, value) {
+            poly_list[index].setAttribute("color", value);
+        });
+        Polymer.updateStyles();
+    } else {
+        var container = $("#log-container");
+        container.text(json["data"]);
+    }
 }

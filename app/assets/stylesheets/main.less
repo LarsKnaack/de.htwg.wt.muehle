@@ -1,3 +1,19 @@
+@column1: 3%;
+@column2: 19%;
+@column3: 35%;
+@column4: 46%;
+@column5: 57%;
+@column6: 74%;
+@column7: 90%;
+
+@row1: -1%;
+@row2: 16%;
+@row3: 31%;
+@row4: 44%;
+@row5: 55%;
+@row6: 71%;
+@row7: 88%;
+
 html {
   margin: 5px;
   padding: 5px;
@@ -61,77 +77,77 @@ body.theme_red {
 
 #gamefield {
   position: relative;
-  min-width: 350px;
+  min-width: 449px;
   .mills_fields1 {
-    .mills_field(0%, 0%);
+    .mills_field(@row1, @column1);
   }
   .mills_fields2 {
-    .mills_field(0%, 45%);
+    .mills_field(@row1, @column4);
   }
   .mills_fields3 {
-    .mills_field(0%, 88%);
-  }
-  .mills_fields4 {
-    .mills_field(17%, 17%);
-  }
-  .mills_fields5 {
-    .mills_field(17%, 45%);
-  }
-  .mills_fields6 {
-    .mills_field(17%, 72%);
-  }
-  .mills_fields7 {
-    .mills_field(33%, 33%);
-  }
-  .mills_fields8 {
-    .mills_field(33%, 45%);
+    .mills_field(@row1, @column7);
   }
   .mills_fields9 {
-    .mills_field(33%, 57%);
+    .mills_field(@row2, @column2);
   }
   .mills_fields10 {
-    .mills_field(45%, 0%);
+    .mills_field(@row2, @column4);
   }
   .mills_fields11 {
-    .mills_field(45%, 17%);
-  }
-  .mills_fields12 {
-    .mills_field(45%, 33%);
-  }
-  .mills_fields13 {
-    .mills_field(45%, 57%);
-  }
-  .mills_fields14 {
-    .mills_field(45%, 72%);
-  }
-  .mills_fields15 {
-    .mills_field(45%, 88%);
-  }
-  .mills_fields16 {
-    .mills_field(57%, 33%);
+    .mills_field(@row2, @column6);
   }
   .mills_fields17 {
-    .mills_field(57%, 45%);
+    .mills_field(@row3, @column3);
   }
   .mills_fields18 {
-    .mills_field(57%, 57%);
+    .mills_field(@row3, @column4);
   }
   .mills_fields19 {
-    .mills_field(74%, 17%);
+    .mills_field(@row3, @column5);
   }
-  .mills_fields20 {
-    .mills_field(74%, 45%);
+  .mills_fields8 {
+    .mills_field(@row4, @column1);
   }
-  .mills_fields21 {
-    .mills_field(74%, 72%);
-  }
-  .mills_fields22 {
-    .mills_field(92%, 0%);
-  }
-  .mills_fields23 {
-    .mills_field(92%, 45%);
+  .mills_fields16 {
+    .mills_field(@row4, @column2);
   }
   .mills_fields24 {
-    .mills_field(92%, 88%);
+    .mills_field(@row4, @column3);
+  }
+  .mills_fields20 {
+    .mills_field(@row4, @column5);
+  }
+  .mills_fields12 {
+    .mills_field(@row4, @column6);
+  }
+  .mills_fields4 {
+    .mills_field(@row4, @column7);
+  }
+  .mills_fields23 {
+    .mills_field(@row5, @column3);
+  }
+  .mills_fields22 {
+    .mills_field(@row5, @column4);
+  }
+  .mills_fields21 {
+    .mills_field(@row5, @column5);
+  }
+  .mills_fields15 {
+    .mills_field(@row6, @column2);
+  }
+  .mills_fields14 {
+    .mills_field(@row6, @column4);
+  }
+  .mills_fields13 {
+    .mills_field(@row6, @column6);
+  }
+  .mills_fields7 {
+    .mills_field(@row7, @column1);
+  }
+  .mills_fields6 {
+    .mills_field(@row7, @column4);
+  }
+  .mills_fields5 {
+    .mills_field(@row7, @column7);
   }
 }

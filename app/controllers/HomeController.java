@@ -1,33 +1,30 @@
 package controllers;
 
-import actors.HomeActor;
 import com.fasterxml.jackson.databind.JsonNode;
 import play.mvc.Controller;
 import play.mvc.LegacyWebSocket;
 import play.mvc.Result;
 import play.mvc.WebSocket;
-import views.html.gui;
+import utils.WebSocketUtils;
 import views.html.index;
-import views.html.rules;
 
 /**
  * This controller contains an action to handle HTTP requests
  * to the application's home page.
  */
-public class HomeController extends Controller {
 
-    private final LegacyWebSocket<JsonNode> socket = WebSocket.withActor(HomeActor::props);
+public class HomeController extends Controller {
 
     public Result index() {
         return ok(index.render("Lars"));
     }
 
     public Result rules() {
-        return ok(rules.render());
+        return ok(views.html.rules.render());
     }
 
     public Result gui() {
-        return ok(gui.render());
+        return ok(views.html.gui.render());
     }
 
     public Result tui() {
@@ -38,8 +35,7 @@ public class HomeController extends Controller {
         return ok(views.js.webSocket.render());
     }
 
-    public LegacyWebSocket<JsonNode> webSocket(){
-        return socket;
+    public LegacyWebSocket<JsonNode> webSocket() {
+        return WebSocket.whenReady((in, out) -> WebSocketUtils.start(in, out));
     }
-
 }
