@@ -3,9 +3,9 @@ package utils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import play.libs.Json;
 import play.mvc.WebSocket;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -54,14 +54,9 @@ public class WebSocketUtils {
     }
 
     public static void sendLog(String log) {
-        String json = "{\"type\": \"log\", \"data\": \"" + log + "\"}";
-        try {
-            broadcastMessage(mapper.readTree(json));
-        } catch (IOException e) {
-            //should not happen
-            e.printStackTrace();
-
-        }
+        JsonNode json = Json.newObject().put("type", "log")
+                .put("data", log);
+        broadcastMessage(json);
     }
 
     private static void broadcastMessage(JsonNode output) {

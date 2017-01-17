@@ -7,7 +7,6 @@ import controller.IController;
 import game.MuehleModule;
 import model.IPlayer;
 import observer.IObserver;
-import view.Tui;
 
 import java.util.Map;
 
@@ -18,7 +17,6 @@ public class MuehleUtils implements IObserver {
 
     private static final Injector injector = Guice.createInjector(new MuehleModule());
     private static final IController controller = injector.getInstance(IController.class);
-    private final Tui tui = new Tui(controller);
 
     public MuehleUtils() {
         controller.registerObserver(this);
@@ -26,8 +24,14 @@ public class MuehleUtils implements IObserver {
 
 
     public Map<Integer, Character> handleInput(JsonNode data) {
-        tui.handleInput(data.asInt());
-        return tui.getVertexMap();
+        if (controller.getCurrentStonesToDelete() > 0) {
+            controller.millDeleteStone(data.asInt());
+        } else if (controller.requireInitial()) {
+            controller.setStone(data.asInt());
+        } else {
+            controller.moveStone(data.asInt());
+        }
+        return controller.getVertexMap();
     }
 
     @Override
