@@ -4,11 +4,12 @@
 
 $(document).ready(function () {
     var buttons = $(":button");
+    $("body").addClass("color-theme-1");
     buttons.click(function (e) {
         var id = this.getAttribute("id");
         $("body").removeClass();
 
-        $("body").addClass("theme-" + id);
+        $("body").addClass("color-" + id);
 
     });
 
