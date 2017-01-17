@@ -1,71 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        @* Here's where we render the page title `String`. *@
-    <title>Morris</title>
-    <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/main.css")">
-    <link rel="shortcut icon" type="image/png" href="@routes.Assets.versioned("images/favicon.png")">
+@main {
+  <script type="text/javascript" src="@routes.Assets.versioned("/javascripts/index.js")"></script>
+  <div class="row" id="index-header">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <h1>Welcome to Morris</h1>
+      <h2>Dummy h2</h2>
+      Dummy Text
+    </div>
+  </div>
+  <div class="row" id="index-body">
+    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+    </div>
+    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" id="index-image">
+      <img src="@routes.Assets.versioned("/images/muehle_transparent.png")" class="img-responsive">
+      <button type="button" class="btn btn-primary" id="theme-1">Theme 1</button>
+      <button type="button" class="btn btn-primary" id="theme-2">Theme 2</button>
+      <button type="button" class="btn btn-primary" id="theme-3">Theme 3</button>
+      <button type="button" class="btn btn-primary" id="theme-4">Theme 4</button>
+      <button type="button" class="btn btn-primary" id="theme-5">Theme 5</button>
+      <button type="button" class="btn btn-primary" id="theme-6">Theme 6</button>
+      <button type="button" class="btn btn-primary" id="theme-7">Theme 7</button>
+      <button type="button" class="btn btn-primary" id="theme-8">Theme 8</button>
+    </div>
+    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
 
-        <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-        <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
-    integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
-        <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-    integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
-        <!-- jQuery -->
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-
-        <!-- Polymer scripts -->
-    <script src="@routes.Assets.versioned("polymer/bower_components/webcomponentsjs/webcomponents-lite.js")"></script>
-    <link rel="import" href="@routes.Assets.versioned("polymer/bower_components/polymer/polymer.html")">
-    <link rel="import" href="@routes.Assets.versioned("polymer/bower_components/google-signin/google-signin.html")">
-    <link rel="import" href="@routes.Assets.versioned("polymer/bower_components/google-signin/google-signin-aware.html")">
-    <link rel="import" href="@routes.Assets.versioned("polymer/src/morris-app/morris-app.html")">
-    <script type="text/javascript" src="@routes.HomeController.javascriptRoutes"></script>
-    <script type="text/javascript" src="@routes.Assets.versioned("/javascripts/index.js")"></script>
-
-    </head>
-    <body class="theme-4">
-        <div class="row" id="index-header">
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <h1>Welcome to Morris</h1>
-                <h2>Dummy h2</h2>
-                Dummy Text
-            </div>
-        </div>
-        <div class="row" id="index-body">
-            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-            </div>
-            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" id="index-image">
-                <img src="@routes.Assets.versioned("/images/muehle_transparent.png")" class="img-responsive">
-                <button type="button" class="btn btn-primary" id="theme-1">Theme 1</button>
-                <button type="button" class="btn btn-primary" id="theme-2">Theme 2</button>
-                <button type="button" class="btn btn-primary" id="theme-3">Theme 3</button>
-                <button type="button" class="btn btn-primary" id="theme-4">Theme 4</button>
-                <button type="button" class="btn btn-primary" id="theme-5">Theme 5</button>
-                <button type="button" class="btn btn-primary" id="theme-6">Theme 6</button>
-                <button type="button" class="btn btn-primary" id="theme-7">Theme 7</button>
-                <button type="button" class="btn btn-primary" id="theme-8">Theme 8</button>
-            </div>
-            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-
-            </div>
-        </div>
-        <template id="awareness" is="dom-bind">
-            <google-signin></google-signin>
-            <google-signin-aware
-            brand="google"
-            client-id="393641479312-mungbg04e9cmkooq11n3u9bci7ac752a.apps.googleusercontent.com"
-            on-google-signin-aware-error="handleSignInError"
-            on-google-signin-aware-success="handleSignIn"
-            on-google-signin-aware-signed-out="handleSignOut"
-            ></google-signin-aware>
-        </template>
-    </body>
-</html>
+    </div>
+  </div>
+  <template id="awareness" is="dom-bind">
+    <google-signin></google-signin>
+    <google-signin-aware
+    brand="google"
+    client-id="393641479312-mungbg04e9cmkooq11n3u9bci7ac752a.apps.googleusercontent.com"
+    on-google-signin-aware-error="handleSignInError"
+    on-google-signin-aware-success="handleSignIn"
+    on-google-signin-aware-signed-out="handleSignOut"
+    ></google-signin-aware>
+  </template>
+}

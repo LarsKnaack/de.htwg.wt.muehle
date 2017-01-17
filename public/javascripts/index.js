@@ -4,31 +4,24 @@
 
 $(document).ready(function () {
     var buttons = $(":button");
-    $("body").addClass("color-theme-1");
     buttons.click(function (e) {
         var id = this.getAttribute("id");
         $("body").removeClass();
-
         $("body").addClass("color-" + id);
-
     });
 
     var aware = document.querySelector('#awareness');
-    aware.userName = '';
 
     aware.handleSignInError = function (event) {
         this.status = JSON.stringify(event.detail);
     };
 
     aware.handleSignIn = function (response) {
-        var status = 'Signin granted';
         var username = gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile().getName();
         $.ajax(jsRoutes.controllers.HomeController.authenticate(username));
-        // console.log('[Aware] Signin Response', response);
     };
 
     aware.handleSignOut = function (response) {
-        this.status = 'Signed out';
-        this.userName = '';
+        $.ajax(jsRoutes.controllers.HomeController.logout());
     };
 })

@@ -1,11 +1,9 @@
 package controllers;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import play.mvc.Controller;
-import play.mvc.LegacyWebSocket;
-import play.mvc.Result;
-import play.mvc.WebSocket;
+import play.mvc.*;
 import play.routing.JavaScriptReverseRouter;
+import services.MyAuthenticator;
 import utils.WebSocketUtils;
 import views.html.index;
 
@@ -22,14 +20,17 @@ public class HomeController extends Controller {
         return ok(index.render());
     }
 
+    @Security.Authenticated(MyAuthenticator.class)
     public Result rules() {
         return ok(views.html.rules.render());
     }
 
+    @Security.Authenticated(MyAuthenticator.class)
     public Result gui() {
         return ok(views.html.gui.render());
     }
 
+    @Security.Authenticated(MyAuthenticator.class)
     public Result tui() {
         return ok(views.html.tui.render());
     }
