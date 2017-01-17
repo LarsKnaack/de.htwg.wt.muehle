@@ -21,13 +21,10 @@ $(document).ready(function () {
     };
 
     aware.handleSignIn = function (response) {
-        this.status = 'Signin granted';
-        this.userName = gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile().getName();
-        var navbar = $('#my-navbar');
-        //alert(this.userName);
-        window.location = "/gui";
+        var status = 'Signin granted';
+        var username = gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile().getName();
+        $.ajax(jsRoutes.controllers.HomeController.authenticate(username));
         // console.log('[Aware] Signin Response', response);
-
     };
 
     aware.handleSignOut = function (response) {

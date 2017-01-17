@@ -5,6 +5,7 @@ import play.mvc.Controller;
 import play.mvc.LegacyWebSocket;
 import play.mvc.Result;
 import play.mvc.WebSocket;
+import play.routing.JavaScriptReverseRouter;
 import utils.WebSocketUtils;
 import views.html.index;
 
@@ -14,6 +15,8 @@ import views.html.index;
  */
 
 public class HomeController extends Controller {
+
+    public static Result GO_HOME = redirect(routes.HomeController.index());
 
     public Result index() {
         return ok(index.render());
@@ -33,6 +36,25 @@ public class HomeController extends Controller {
 
     public Result webSocketJS() {
         return ok(views.js.webSocket.render());
+    }
+
+    public Result authenticate(String username) {
+        session("user", username);
+        System.out.println("Authenticating user " + username);
+        return GO_HOME;
+    }
+
+    public Result logout() {
+        session().clear();
+        return GO_HOME;
+    }
+
+    public Result javascriptRoutes() {
+        return ok(
+                JavaScriptReverseRouter.create("jsRoutes",
+                        routes.javascript.HomeController.authenticate(),
+                        routes.javascript.HomeController.logout())
+        ).as("text/javascript");
     }
 
     public LegacyWebSocket<JsonNode> webSocket() {
