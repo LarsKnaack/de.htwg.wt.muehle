@@ -12,7 +12,7 @@ public class MyAuthenticator extends Security.Authenticator {
 
     @Override
     public String getUsername(Http.Context ctx) {
-        return ctx.session().get("user");
+        return ctx.session().get("email");
     }
 
     @Override

@@ -18,10 +18,10 @@ $(document).ready(function () {
 
     aware.handleSignIn = function (response) {
         var username = gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile().getName();
-        $.ajax(jsRoutes.controllers.HomeController.authenticate(username));
+        //$.ajax(jsRoutes.controllers.HomeController.authenticate(username));
     };
 
     aware.handleSignOut = function (response) {
-        $.ajax(jsRoutes.controllers.HomeController.logout());
+        //$.ajax(jsRoutes.controllers.HomeController.logout());
     };
 })
