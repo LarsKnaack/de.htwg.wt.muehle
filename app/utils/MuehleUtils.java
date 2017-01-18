@@ -17,11 +17,16 @@ public class MuehleUtils implements IObserver {
 
     private static final Injector injector = Guice.createInjector(new MuehleModule());
     private static final IController controller = injector.getInstance(IController.class);
+    private static final MuehleUtils muehleUtils = new MuehleUtils();
 
-    public MuehleUtils() {
+    private MuehleUtils() {
         controller.registerObserver(this);
     }
 
+
+    public static MuehleUtils getInstance() {
+        return muehleUtils;
+    }
 
     public Map<Integer, Character> handleInput(JsonNode data) {
         if (controller.getCurrentStonesToDelete() > 0) {

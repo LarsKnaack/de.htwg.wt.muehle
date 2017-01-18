@@ -18,13 +18,19 @@ public class WebSocketUtils {
 
     private static List<WebSocket.Out<JsonNode>> connections = new ArrayList<>();
 
-    private static final MuehleUtils muehleUtils = new MuehleUtils();
+    private static MuehleUtils muehleUtils = MuehleUtils.getInstance();
 
     private static final ObjectMapper mapper = new ObjectMapper();
 
     public static void start(WebSocket.In<JsonNode> in, WebSocket.Out<JsonNode> out) {
         connections.add(out);
         in.onMessage(jsonNode -> handleMessage(jsonNode));
+        in.onClose(() -> stop(out));
+    }
+
+    private static void stop(WebSocket.Out<JsonNode> out) {
+        connections.remove(out);
+
     }
 
     public static void handleMessage(JsonNode jsonNode) {
