@@ -1,21 +1,23 @@
 @(theme: String)
 @main(theme){
   <script src="@routes.Assets.versioned("/javascripts/guiCreator.js")"></script>
-  <div class="row">
-    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-      <moris-app id="white"></moris-app>
-    </div>
-    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" id="gamefield">
-      <img src="@routes.Assets.versioned("/images/muehle_transparent.png")" class="img-responsive">
-    </div>
-    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-
-    </div>
+  <div id="gui-content">
     <div class="row">
-      <div id="log-container" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        Player1 startet
+      <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+        Steine Player 1: 9
       </div>
-    </div>
+      <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" id="gamefield">
+        <img src="@routes.Assets.versioned("/images/muehle_transparent.png")" class="img-responsive">
+      </div>
+      <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+        Steine Player 2: 9
+      </div>
+      <div class="row">
+        <div id="log-container" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          Player1 startet
+        </div>
+      </div>
 
+    </div>
   </div>
 }
