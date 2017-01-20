@@ -30,6 +30,9 @@ public class AuthenticationController {
     }
 
     public Result logout() {
+        if (session("google").equals("true")) {
+
+        }
         session().clear();
         return GO_HOME;
     }
@@ -79,6 +82,7 @@ public class AuthenticationController {
     }
 
     public Result googleLogin(String email) {
+        session("google", "true");
         session("email", email);
         return ok();
     }

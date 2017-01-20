@@ -23,6 +23,9 @@ public class HomeController extends Controller {
 
     @Security.Authenticated(AuthenticatorService.class)
     public Result index() {
+        if (session("google").equals("true")) {
+            return ok(index.render(theme));
+        }
         String email = session("email");
         Optional<User> user = userService.getUserByMail(email);
         if (!user.isPresent()) {
@@ -47,6 +50,8 @@ public class HomeController extends Controller {
     public Result tui() {
         return ok(views.html.tui.render(theme));
     }
+
+    /****************************** Utility Methods ****************************************/
 
     public Result webSocketJS() {
         return ok(views.js.webSocket.render());
