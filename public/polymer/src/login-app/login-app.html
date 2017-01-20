@@ -1,0 +1,33 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/google-signin/google-signin.html">
+<link rel="import" href="../../bower_components/google-signin/google-signin-aware.html">
+
+<dom-module id="morris-app">
+    <template id="awareness" is="dom-bind">
+        <google-signin width="wide"></google-signin>
+        <google-signin-aware
+                brand="google"
+                client-id="393641479312-mungbg04e9cmkooq11n3u9bci7ac752a.apps.googleusercontent.com"
+                on-google-signin-aware-error="handleSignInError"
+                on-google-signin-aware-success="handleSignIn"
+                on-google-signin-aware-signed-out="handleSignOut"
+        ></google-signin-aware>
+    </template>
+    <script>
+        var aware = document.querySelector('#awareness');
+
+        aware.handleSignInError = function (event) {
+            this.status = JSON.stringify(event.detail);
+        };
+
+        aware.handleSignIn = function (response) {
+            var username = gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile().getEmail();
+            console.log("Username: " + username);
+            $.ajax(jsRoutes.controllers.AuthenticationController.googleLogin(username));
+        };
+
+        aware.handleSignOut = function (response) {
+            $.ajax(jsRoutes.controllers.AuthenticationController.logout());
+        };
+    </script>
+</dom-module>
