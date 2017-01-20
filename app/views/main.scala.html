@@ -4,7 +4,7 @@
  * two arguments, a `String` for the title of the page and an `Html`
  * object to insert into the body of the page.
  *@
-@(content: Html)
+@(theme: String)(content: Html)
 
 <!DOCTYPE html>
 <html lang="en">
@@ -36,10 +36,11 @@
         <link rel="import"href="@routes.Assets.versioned("polymer/bower_components/google-signin/google-signin-aware.html")">
         <link rel="import"href="@routes.Assets.versioned("polymer/src/morris-app/morris-app.html")">
         <script type="text/javascript" src="@routes.HomeController.webSocketJS()"></script>
+        <script type="text/javascript" src="@routes.HomeController.jsRoutes"></script>
 
 
     </head>
-    <body class="color-theme-4">
+    <body class=@theme>
         <nav id="my-navbar" class="navbar navbar-inverse navbar-fixed-top">
             <div class="container-fluid">
                 <div class="navbar-header">

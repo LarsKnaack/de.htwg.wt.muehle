@@ -17,7 +17,9 @@ POST        /login               controllers.AuthenticationController.authentica
 GET         /signup              controllers.AuthenticationController.signupForm
 POST        /signup              controllers.AuthenticationController.signup
 
+POST        /theme/:theme         controllers.HomeController.setTheme(theme:String)
+
 # Map static resources from the /public folder to the /assets URL path
 GET         /assets/*file        controllers.Assets.versioned(path="/public", file: Asset)
 GET         /webSocket.js        controllers.HomeController.webSocketJS
-
+GET         /jsRoutes            controllers.HomeController.jsRoutes
