@@ -1,4 +1,4 @@
-package utils;
+package services;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -14,11 +14,11 @@ import java.util.Map;
 /**
  * Created by Lars on 15.01.2017.
  */
-public class WebSocketUtils {
+public class WebSocketService {
 
     private static List<WebSocket.Out<JsonNode>> connections = new ArrayList<>();
 
-    private static MuehleUtils muehleUtils = MuehleUtils.getInstance();
+    private static MuehleService muehleService = MuehleService.getInstance();
 
     private static final ObjectMapper mapper = new ObjectMapper();
 
@@ -34,6 +34,7 @@ public class WebSocketUtils {
     }
 
     public static void handleMessage(JsonNode jsonNode) {
+
         Map response = new HashMap<>();
         String type = jsonNode.get("type").asText();
         JsonNode data = jsonNode.get("data");
@@ -41,7 +42,7 @@ public class WebSocketUtils {
         if (type.equals("chat")) {
             response.put("data", data);
         } else if (type.equals("update")) {
-            Map<Integer, Character> vertexMap = muehleUtils.handleInput(data);
+            Map<Integer, Character> vertexMap = muehleService.handleInput(data);
             response.put("data", createJson(vertexMap));
         }
         JsonNode output = mapper.convertValue(response, JsonNode.class);

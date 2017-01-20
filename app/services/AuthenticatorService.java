@@ -1,6 +1,5 @@
 package services;
 
-import controllers.HomeController;
 import play.mvc.Http;
 import play.mvc.Result;
 import play.mvc.Security;
@@ -8,7 +7,7 @@ import play.mvc.Security;
 /**
  * Created by Lars on 17.01.2017.
  */
-public class MyAuthenticator extends Security.Authenticator {
+public class AuthenticatorService extends Security.Authenticator {
 
     @Override
     public String getUsername(Http.Context ctx) {
@@ -17,6 +16,6 @@ public class MyAuthenticator extends Security.Authenticator {
 
     @Override
     public Result onUnauthorized(Http.Context ctx) {
-        return HomeController.GO_HOME;
+        return redirect(controllers.routes.AuthenticationController.login());
     }
 }

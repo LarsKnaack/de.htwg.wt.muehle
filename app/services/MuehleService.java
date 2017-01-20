@@ -1,4 +1,4 @@
-package utils;
+package services;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.google.inject.Guice;
@@ -13,19 +13,19 @@ import java.util.Map;
 /**
  * Created by Lars on 15.01.2017.
  */
-public class MuehleUtils implements IObserver {
+public class MuehleService implements IObserver {
 
     private static final Injector injector = Guice.createInjector(new MuehleModule());
     private static final IController controller = injector.getInstance(IController.class);
-    private static final MuehleUtils muehleUtils = new MuehleUtils();
+    private static final MuehleService MUEHLE_SERVICE = new MuehleService();
 
-    private MuehleUtils() {
+    private MuehleService() {
         controller.registerObserver(this);
     }
 
 
-    public static MuehleUtils getInstance() {
-        return muehleUtils;
+    public static MuehleService getInstance() {
+        return MUEHLE_SERVICE;
     }
 
     public Map<Integer, Character> handleInput(JsonNode data) {
@@ -53,6 +53,6 @@ public class MuehleUtils implements IObserver {
         } else {
             log = currentPlayer.getName() + " ist an der Reihe!";
         }
-        WebSocketUtils.sendLog(log);
+        WebSocketService.sendLog(log);
     }
 }
