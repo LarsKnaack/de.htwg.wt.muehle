@@ -33,15 +33,20 @@
                 <button type="submit" class="btn btn-default">Submit</button>
                 <a type="button" class="btn btn-default" href="@routes.AuthenticationController.signup">
                     Signup as new User</a>
+
             </div>
-            
-            <div class="g-signin2" id="signInButton" data-onsuccess="onSignIn"></div>
-                <script>
-                    function onSignIn(googleUser) {
-                        window.location = "/gui"
-                    };
-                </script>
+
         }
+            <template id="awareness" is="dom-bind">
+                <google-signin width="wide"></google-signin>
+                <google-signin-aware
+                brand="google"
+                client-id="393641479312-mungbg04e9cmkooq11n3u9bci7ac752a.apps.googleusercontent.com"
+                on-google-signin-aware-error="handleSignInError"
+                on-google-signin-aware-success="handleSignIn"
+                on-google-signin-aware-signed-out="handleSignOut"
+                ></google-signin-aware>
+            </template>
         </div>
     </div>
 }
