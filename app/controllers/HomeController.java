@@ -23,7 +23,7 @@ public class HomeController extends Controller {
 
     @Security.Authenticated(AuthenticatorService.class)
     public Result index() {
-        if (session("google").equals("true")) {
+        if (null != session("google")) {
             return ok(index.render(theme));
         }
         String email = session("email");

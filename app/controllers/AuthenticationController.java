@@ -30,9 +30,6 @@ public class AuthenticationController {
     }
 
     public Result logout() {
-        if (session("google").equals("true")) {
-
-        }
         session().clear();
         return GO_HOME;
     }
