@@ -77,4 +77,9 @@ public class AuthenticationController {
             return GO_HOME;
         }
     }
+
+    public Result googleLogin(String email) {
+        session("email", email);
+        return ok();
+    }
 }

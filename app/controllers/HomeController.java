@@ -62,16 +62,12 @@ public class HomeController extends Controller {
         return ok();
     }
 
-    public Result googleLogin(String email) {
-        session("email", email);
-        return ok();
-    }
-
     public Result jsRoutes() {
         return ok(
                 JavaScriptReverseRouter.create("jsRoutes",
                         routes.javascript.HomeController.setTheme(),
-                        routes.javascript.HomeController.googleLogin()))
+                        routes.javascript.AuthenticationController.googleLogin(),
+                        routes.javascript.AuthenticationController.logout()))
                 .as("text/javascript");
     }
 

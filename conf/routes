@@ -17,7 +17,7 @@ POST        /login                     controllers.AuthenticationController.auth
 GET         /signup                    controllers.AuthenticationController.signupForm
 POST        /signup                    controllers.AuthenticationController.signup
 
-POST        /googleLogin/:email        controllers.HomeController.googleLogin(email: String)
+POST        /googleLogin/:email        controllers.AuthenticationController.googleLogin(email: String)
 
 POST        /theme/:theme              controllers.HomeController.setTheme(theme:String)
 
