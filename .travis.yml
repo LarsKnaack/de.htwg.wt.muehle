@@ -3,3 +3,9 @@ scala:
 - 2.11.7
 jdk:
 - oraclejdk8
+deploy:
+  app:
+    CI_heroku: travis-morris-test
+  provider: heroku
+  api_key:
+    secure: CvTPBu5hdwa7wcC/9pwObHHG/SrnTL9ad4zUAKfRJe1mlrAkq5+p7iApS3vagi/DYiIBtEZFf5xcLPeS/+sJYjtO/cmE9MwySjevBCaJJowIJY1lh9fj0Q2TTYz2C5s/2VH346x/g9JAiDH/gnVx4dbpsz3JpIEzncgVmtGTEw9/d+tpPxVKImkaWsibkpKX5IZaS/e5bsRyAOzgwkV6WLzmOl/Yx3Oi4oIZ0VXNyhZc09HGFN7SloHqeZbKDNdPX9NyNvs5ppbATqjxCcjpWMjhWwbvfp/DpDt3kS9RWod3V7Ris8KUvTkgSVb5r2BmHeF1EJ//litQv3Qtd4s+vsAY8bXuGPr8XV7gxuK7sFZGzdbBwVW5jgh1fh/4r4lu+VdTlcrEL3ONNeo95DErJC7pMmixX1Q5jeCp02greXnv/PPYrv2sq7AjZx6njixSCsahNNB1C3SZwWl4UeIrLewn6BzD2S4tXUhPsqd8VUrCxdZTn2Mt8m4C0VPLs0V3DiwOglJ9Ybh2DTjsCDM5rYB64w3n1tMDK3IFKUjtFtO4XJxAsAmxsR6vCrM1zBLIeXmPugCtv+UeGRu4xoiUWV+qby8OADByVWwNtCEqsyA67ofmPEas2jgRABOkPprJSDOTaxPpFc/u2BAwGMyHegy72bCvDgVCTCTZIdHGphQ=
