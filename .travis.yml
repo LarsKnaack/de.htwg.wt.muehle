@@ -12,7 +12,8 @@ deploy:
   provider: heroku
   api_key:
     secure: 5sbyTqGXpkAnMPQEjB1dd5f4SN6N7XwOXuIBXCT944K3OaeE3esHTFWHgT/hY3mun+uBmtXH2w6f3nHfeauJFFdd7bcqPB/Cg8naoe1ERVTaAPOa6+zm10gvHCdn+c4wvk4jgOIf/AVRQZZGnNfOAibZTz1n0h5NFdh7KIa0wXW+sO6PJFJp654by86B1tJ5e4GkJq+sFZ+BBhOFS6FCQjOtTfC6MWukgj68Pa7bCANdwellpyLosd7KIDfWLtcrkHBXBE4BgpV+zHv1S0rhAQPybYkcX5QgIeg2gJHxAASHEh+R0VpKpXs0kXN+1r1U82U2ZRXouK8knAzN8mN0hBGBnkwld840I8thk8hR7mTBWJOIKJgJGH9lpENRcThjdc9qjZOTbWx62a5OLwgklH4HDfS/BjwD301LEKXM/myH9hiXKJhNH/GYJOHjxCwiTVQb5EYaM6Dox++VES2xnLlEFa03WN3i1lfdZ4lD6caTpsAwQvhRGswbk9/ruiSwdg5vkc9ryY8D3AcO+iY7GITsDQug0EwiTsHv5oQnB4+5vSlizCiAmVXp6T3W2VaSqLX/vED7FzCLAOo/td2ReywubaEZKrvg8e+CGvwi7+0JhFJ0gzLWigEcgjOHanawulxbk8b7S6K/vTJ363zbzIBYdDGMaF9A9zwy19hK29E=
-  app: travis-morris-test
+  app:
+    master: htwg-morris
+    development: travis-morris-test
   on:
     repo: LarsKnaack/de.htwg.wt.muehle
-    branch: CI_heroku
