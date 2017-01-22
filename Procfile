@@ -1,1 +1,1 @@
-web: target/universal/stage/bin/htwg-morris -Dhttps.port=${PORT}
+web: target/universal/stage/bin/htwg-morris -Dhttp.port=disabled -Dhttps.port=${PORT} -Dplay.server.https.keyStore.path=htwgmorris.jks -Dplay.server.https.keyStore.password=${KEY_PASS}
