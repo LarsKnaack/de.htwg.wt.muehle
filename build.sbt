@@ -1,8 +1,6 @@
-name := "play-java"
+name := "htwg-morris"
 
 version := "1.0-SNAPSHOT"
-
-herokuAppName in Compile := "evening-escarpment-54416"
 
 lazy val root = (project in file(".")).enablePlugins(PlayJava)
 
