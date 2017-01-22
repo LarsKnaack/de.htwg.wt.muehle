@@ -1,0 +1,1 @@
+web: target/universal/stage/bin/htwg-morris -Dhttps.port=${PORT}
