@@ -8,6 +8,8 @@ import game.MuehleModule;
 import model.IPlayer;
 import observer.IObserver;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -54,5 +56,11 @@ public class MuehleService implements IObserver {
             log = currentPlayer.getName() + " ist an der Reihe!";
         }
         WebSocketService.sendLog(log);
+    }
+
+    public List<Integer> getStoneCounters() {
+        return Arrays.asList(
+                9 - controller.getSettedStonesPlayer1(),
+                9 - controller.getSettedStonesPlayer2());
     }
 }

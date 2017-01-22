@@ -6,10 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import play.libs.Json;
 import play.mvc.WebSocket;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by Lars on 15.01.2017.
@@ -44,6 +41,7 @@ public class WebSocketService {
         } else if (type.equals("update")) {
             Map<Integer, Character> vertexMap = muehleService.handleInput(data);
             response.put("data", createJson(vertexMap));
+            response.put("stones", muehleService.getStoneCounters());
         }
         JsonNode output = mapper.convertValue(response, JsonNode.class);
         broadcastMessage(output);

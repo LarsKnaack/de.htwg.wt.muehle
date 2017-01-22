@@ -20,6 +20,12 @@ var writeMessages = function (event) {
             poly_list[index].setAttribute("color", value);
         });
         Polymer.updateStyles();
+        var info = $("#playerinfo");
+        info.html("Player 1: " + json["stones"][0] + "<br>" + "Player 2: " + json["stones"][1]);
+    } else if (json["type"] == "log") {
+        console.log("Got Log: " + json["data"]);
+        var log_container = $("#log-container");
+        log_container.html(json["data"]);
     }
 };
 
