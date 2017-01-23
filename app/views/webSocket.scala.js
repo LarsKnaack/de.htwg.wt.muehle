@@ -35,7 +35,6 @@ $(document).ready(function() {
     for (var i = 1; i <= 24; i++) {
         var div = document.createElement('div');
         var poly_elem = document.createElement('morris-app');
-        poly_elem.setAttribute("color", "n");
         poly_elem.setAttribute("vertex", i.toString());
         poly_list[i.toString()] = poly_elem;
         div.appendChild(poly_elem);
@@ -45,6 +44,8 @@ $(document).ready(function() {
             sendMessage("update", this.getAttribute("vertex"));
         };
     }
+
+    sendMessage("update", "1000");
 
     $('#chat-input').keyup(function (event) {
         var charCode = (event.which) ? event.which : event.keyCode;
@@ -59,6 +60,23 @@ $(document).ready(function() {
 
 function sendMessage(type, data) {
     var message = {"type": type, "data": data};
-    console.log(JSON.stringify(message));
-    socket.send(JSON.stringify(message));
+    waitForConnection(function () {
+        socket.send(JSON.stringify(message));
+        console.log("Message sent");
+        if (typeof callback !== 'undefined') {
+            callback();
+        }
+    }, 1000);
 }
+
+waitForConnection = function (callback, interval) {
+    if (socket.readyState === 1) {
+        callback();
+    } else {
+        console.log("Waiting for connection...");
+        // optional: implement backoff for interval here
+        setTimeout(function () {
+            waitForConnection(callback, interval);
+        }, interval);
+    }
+};

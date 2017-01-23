@@ -1,12 +1,12 @@
 package controllers;
 
-import actors.MyActor;
 import com.fasterxml.jackson.databind.JsonNode;
 import models.User;
 import play.mvc.*;
 import play.routing.JavaScriptReverseRouter;
 import services.AuthenticatorService;
 import services.UserService;
+import services.WebSocketService;
 import views.html.index;
 
 import java.util.Optional;
@@ -58,7 +58,7 @@ public class HomeController extends Controller {
     }
 
     public LegacyWebSocket<JsonNode> webSocket() {
-        return WebSocket.withActor(MyActor::props);
+        return WebSocket.whenReady((in, out) -> WebSocketService.start(in, out));
     }
 
     public Result setTheme(String theme) {
