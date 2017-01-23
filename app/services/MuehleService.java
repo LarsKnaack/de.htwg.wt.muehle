@@ -38,7 +38,7 @@ public class MuehleService implements IObserver {
         } else {
             controller.moveStone(data.asInt());
         }
-        return controller.getVertexMap();
+        return getMap();
     }
 
     @Override
@@ -62,5 +62,9 @@ public class MuehleService implements IObserver {
         return Arrays.asList(
                 9 - controller.getSettedStonesPlayer1(),
                 9 - controller.getSettedStonesPlayer2());
+    }
+
+    public Map<Integer, Character> getMap() {
+        return controller.getVertexMap();
     }
 }
