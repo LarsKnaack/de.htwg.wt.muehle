@@ -18,7 +18,7 @@ import java.util.Map;
 public class MuehleService implements IObserver {
 
     private static final Injector injector = Guice.createInjector(new MuehleModule());
-    private static final IController controller = injector.getInstance(IController.class);
+    private static IController controller = injector.getInstance(IController.class);
     private static final MuehleService MUEHLE_SERVICE = new MuehleService();
 
     private MuehleService() {
@@ -66,5 +66,9 @@ public class MuehleService implements IObserver {
 
     public Map<Integer, Character> getMap() {
         return controller.getVertexMap();
+    }
+
+    public void resetController() {
+        controller = injector.getInstance(IController.class);
     }
 }

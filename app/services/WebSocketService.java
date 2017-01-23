@@ -27,6 +27,9 @@ public class WebSocketService {
 
     private static void stop(WebSocket.Out<JsonNode> out) {
         connections.remove(out);
+        if (connections.isEmpty()) {
+            muehleService.resetController();
+        }
 
     }
 
