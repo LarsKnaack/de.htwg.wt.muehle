@@ -4,12 +4,8 @@
     // get websocket class, firefox has a different way to get it
 
 var WS = window['MozWebSocket'] ? window['MozWebSocket'] : WebSocket;
-var socket;
-if (location.protocol === "https") {
-    socket = new WS("wss://localhost:9043/ws");
-} else {
-    socket = new WS('@routes.HomeController.webSocket().webSocketURL(request)');
-}
+var socket = new WS('@routes.HomeController.webSocket().webSocketURL(request)');
+
 
 var poly_list = {};
 
