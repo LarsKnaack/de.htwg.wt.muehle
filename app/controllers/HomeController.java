@@ -63,7 +63,6 @@ public class HomeController extends Controller {
 
     public Result setTheme(String theme) {
         this.theme = theme;
-        System.out.println("Setting theme to " + theme);
         return ok();
     }
 
