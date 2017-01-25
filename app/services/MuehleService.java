@@ -70,5 +70,6 @@ public class MuehleService implements IObserver {
 
     public void resetController() {
         controller = injector.getInstance(IController.class);
+        controller.registerObserver(this);
     }
 }
