@@ -2,6 +2,8 @@
 
 # Risiko
 
+Find us on [Heroku](https://htwg-morris.herokuapp.com)
+
 ### 1. Purpose of the project
 * Continuing the project [de.htwg.se.muehle](github.com/LarsKnaack/de.htwg.se.muehle)
 * Setting up a WebUI with the Play!Framework for the lecture "Web technologies" at HTWG Konstanz
