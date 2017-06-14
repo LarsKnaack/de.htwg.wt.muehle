@@ -1,18 +1,10 @@
 package services;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import play.libs.Json;
-import play.mvc.WebSocket;
-
-import java.util.*;
-
 /**
  * Created by Lars on 15.01.2017.
  */
 public class WebSocketService {
-
+/*
     private static List<WebSocket.Out<JsonNode>> connections = new ArrayList<>();
 
     private static MuehleService muehleService = MuehleService.getInstance();
@@ -72,4 +64,4 @@ public class WebSocketService {
             out.write(output);
         }
     }
-}
+*/}

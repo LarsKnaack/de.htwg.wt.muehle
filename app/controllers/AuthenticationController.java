@@ -1,9 +1,10 @@
 package controllers;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.google.inject.Inject;
 import models.User;
-import play.data.DynamicForm;
 import play.data.Form;
+import play.data.FormFactory;
 import play.libs.Json;
 import play.mvc.Result;
 import services.UserService;
@@ -21,12 +22,15 @@ import static play.mvc.Results.*;
  */
 public class AuthenticationController {
 
+    @Inject
+    FormFactory formFactory;
+
     private UserService userService = UserService.getInstance();
 
     private static Result GO_HOME = redirect(routes.HomeController.index());
 
     public Result login() {
-        return ok(login.render(Form.form(User.class)));
+        return ok(login.render(formFactory.form(User.class)));
     }
 
     public Result logout() {
@@ -35,11 +39,11 @@ public class AuthenticationController {
     }
 
     public Result signupForm() {
-        return ok(signup.render(Form.form(User.class)));
+        return ok(signup.render(formFactory.form(User.class)));
     }
 
     public Result authenticate() {
-        Form<User> loginform = DynamicForm.form(User.class).bindFromRequest();
+        Form<User> loginform = formFactory.form(User.class).bindFromRequest();
         Optional<User> user = Optional.empty();
         if (!loginform.hasErrors()) {
             user = userService.authenticate(loginform.get());
@@ -57,7 +61,7 @@ public class AuthenticationController {
     }
 
     public Result signup() {
-        Form<User> loginform = DynamicForm.form(User.class).bindFromRequest();
+        Form<User> loginform = formFactory.form(User.class).bindFromRequest();
 
         ObjectNode response = Json.newObject();
         User account = loginform.get();

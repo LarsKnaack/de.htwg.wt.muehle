@@ -55,7 +55,7 @@ public class MuehleService implements IObserver {
         } else {
             log = currentPlayer.getName() + " ist an der Reihe!";
         }
-        WebSocketService.sendLog(log);
+        //WebSocketService.sendLog(log);
     }
 
     public List<Integer> getStoneCounters() {
