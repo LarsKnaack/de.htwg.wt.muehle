@@ -3,7 +3,8 @@ addSbtPlugin("com.typesafe.play" % "sbt-plugin" % "2.6.0-RC2")
 
 // Workaround for Logging in 2.6
 // see https://github.com/playframework/playframework/issues/7422
-libraryDependencies += "ch.qos.logback" % "logback-classic" % "1.2.3"
+//libraryDependencies += "ch.qos.logback" % "logback-classic" % "1.2.3"
+libraryDependencies += "org.slf4j" % "slf4j-nop" % "1.7.25"
 
 // Web plugins
 addSbtPlugin("com.typesafe.sbt" % "sbt-less" % "1.1.0")
