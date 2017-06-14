@@ -1,11 +1,12 @@
 // The Play plugin
 addSbtPlugin("com.typesafe.play" % "sbt-plugin" % "2.6.0-RC2")
 
+// Workaround for Logging in 2.6
+// see https://github.com/playframework/playframework/issues/7422
+libraryDependencies += "ch.qos.logback" % "logback-classic" % "1.2.3"
+
 // Web plugins
 addSbtPlugin("com.typesafe.sbt" % "sbt-less" % "1.1.0")
-
-// Heroku Plugin
-addSbtPlugin("com.heroku" % "sbt-heroku" % "1.0.1")
 
 // Play enhancer - this automatically generates getters/setters for public fields
 // and rewrites accessors of these fields to use the getters/setters. Remove this

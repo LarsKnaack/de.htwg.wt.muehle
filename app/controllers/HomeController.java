@@ -1,13 +1,17 @@
 package controllers;
 
+import actors.WebSocketActor;
 import akka.actor.ActorSystem;
 import akka.stream.Materializer;
-import akka.stream.javadsl.Flow;
+import com.google.inject.Inject;
 import models.User;
+import play.libs.streams.ActorFlow;
 import play.mvc.Controller;
 import play.mvc.Result;
+import play.mvc.Security;
 import play.mvc.WebSocket;
 import play.routing.JavaScriptReverseRouter;
+import services.AuthenticatorService;
 import services.UserService;
 import views.html.index;
 
@@ -25,7 +29,13 @@ public class HomeController extends Controller {
     private ActorSystem actorSystem;
     private Materializer materializer;
 
-    //@Security.Authenticated(AuthenticatorService.class)
+    @Inject
+    public HomeController(ActorSystem actorSystem, Materializer materializer) {
+        this.actorSystem = actorSystem;
+        this.materializer = materializer;
+    }
+
+    @Security.Authenticated(AuthenticatorService.class)
     public Result index() {
         if (null != session("google")) {
             return ok(index.render(theme));
@@ -34,23 +44,22 @@ public class HomeController extends Controller {
         Optional<User> user = userService.getUserByMail(email);
         if (!user.isPresent()) {
             session().clear();
-            System.out.println("INIT");
             return LOGIN;
         }
         return ok(index.render(theme));
     }
 
-    //@Security.Authenticated(AuthenticatorService.class)
+    @Security.Authenticated(AuthenticatorService.class)
     public Result rules() {
         return ok(views.html.rules.render(theme));
     }
 
-    //@Security.Authenticated(AuthenticatorService.class)
+    @Security.Authenticated(AuthenticatorService.class)
     public Result gui() {
         return ok(views.html.gui.render(theme));
     }
 
-    //@Security.Authenticated(AuthenticatorService.class)
+    @Security.Authenticated(AuthenticatorService.class)
     public Result tui() {
         return ok(views.html.tui.render(theme));
     }
@@ -62,11 +71,11 @@ public class HomeController extends Controller {
     }
 
     public WebSocket webSocket() {
-        return WebSocket.Text.accept(request -> {
-            return Flow.<String>create().map(msg -> {
-                return msg;
-            });
-        });
+        return WebSocket.Json.accept(request ->
+                ActorFlow.actorRef(WebSocketActor::props,
+                        actorSystem, materializer
+                )
+        );
     }
 
     public Result setTheme(String theme) {
