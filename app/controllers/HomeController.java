@@ -2,10 +2,12 @@ package controllers;
 
 import actors.WebSocketActor;
 import akka.actor.ActorSystem;
+import akka.actor.Props;
 import akka.stream.Materializer;
 import com.google.inject.Inject;
 import models.User;
 import play.libs.streams.ActorFlow;
+import play.libs.ws.WSClient;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
@@ -28,11 +30,13 @@ public class HomeController extends Controller {
     private String theme = "color-theme-4";
     private ActorSystem actorSystem;
     private Materializer materializer;
+    private WSClient client;
 
     @Inject
-    public HomeController(ActorSystem actorSystem, Materializer materializer) {
+    public HomeController(ActorSystem actorSystem, Materializer materializer, WSClient client) {
         this.actorSystem = actorSystem;
         this.materializer = materializer;
+        this.client = client;
     }
 
     @Security.Authenticated(AuthenticatorService.class)
@@ -56,6 +60,7 @@ public class HomeController extends Controller {
 
     @Security.Authenticated(AuthenticatorService.class)
     public Result gui() {
+
         return ok(views.html.gui.render(theme));
     }
 
@@ -72,7 +77,7 @@ public class HomeController extends Controller {
 
     public WebSocket webSocket() {
         return WebSocket.Json.accept(request ->
-                ActorFlow.actorRef(WebSocketActor::props,
+                ActorFlow.actorRef(actorRef -> Props.create(WebSocketActor.class, actorRef, client),
                         actorSystem, materializer
                 )
         );

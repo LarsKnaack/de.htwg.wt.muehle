@@ -11,17 +11,17 @@ var poly_list = {};
 
 var writeMessages = function (event) {
     var json = JSON.parse(event.data);
-    console.log("Got message: " + json);
+    console.log("Got message: " + JSON.stringify(json));
     if(json["type"] === "chat") {
         $('#chat-messages').prepend('<p>' + json["data"] + '</p>');
     } else if (json["type"] === "update") {
-        var data = JSON.parse(json["data"]);
-        $.each(data, function (index, value) {
-            poly_list[index].setAttribute("color", value);
-        });
+        var data = json["gamefield"];
+        for (var x = 1; x <= data.length; x++) {
+            poly_list[x.toString()].setAttribute("color", data.charAt(x - 1));
+        }
         Polymer.updateStyles();
         var info = $("#playerinfo");
-        info.html("Player 1: " + json["stones"][0] + "<br>" + "Player 2: " + json["stones"][1]);
+        info.html("Player 1: " + json["stones"]["Player1"] + "<br>" + "Player 2: " + json["stones"]["Player2"]);
     } else if (json["type"] == "log") {
         console.log("Got Log: " + json["data"]);
         var log_container = $("#log-container");
@@ -41,11 +41,9 @@ $(document).ready(function() {
         $(div).addClass("mills_fields" + i)
             .appendTo(gamefield);
         poly_elem.onclick = function () {
-            sendMessage("update", this.getAttribute("vertex"));
+            sendMessage("input", this.getAttribute("vertex"));
         };
     }
-
-    sendMessage("update", "1000");
 
     $('#chat-input').keyup(function (event) {
         var charCode = (event.which) ? event.which : event.keyCode;
@@ -56,6 +54,8 @@ $(document).ready(function() {
             $(this).val('');
         }
     });
+
+    sendMessage("update", "");
 })
 
 function sendMessage(type, data) {
