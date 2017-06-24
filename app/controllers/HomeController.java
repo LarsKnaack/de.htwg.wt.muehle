@@ -13,6 +13,7 @@ import play.mvc.Result;
 import play.mvc.Security;
 import play.mvc.WebSocket;
 import play.routing.JavaScriptReverseRouter;
+import service.RestService;
 import services.AuthenticatorService;
 import services.UserService;
 import views.html.index;
@@ -31,12 +32,14 @@ public class HomeController extends Controller {
     private ActorSystem actorSystem;
     private Materializer materializer;
     private WSClient client;
+    private RestService restService;
 
     @Inject
-    public HomeController(ActorSystem actorSystem, Materializer materializer, WSClient client) {
+    public HomeController(ActorSystem actorSystem, Materializer materializer, WSClient client, RestService restService) {
         this.actorSystem = actorSystem;
         this.materializer = materializer;
         this.client = client;
+        this.restService = restService;
     }
 
     @Security.Authenticated(AuthenticatorService.class)
