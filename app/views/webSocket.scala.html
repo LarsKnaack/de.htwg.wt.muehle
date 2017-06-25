@@ -1,8 +1,5 @@
-/**
- * Created by Lars on 11.01.2017.
- */
-    // get websocket class, firefox has a different way to get it
-
+@(adress: String)
+<script>
     var WS = window['MozWebSocket'] ? window['MozWebSocket'] : WebSocket;
     var socket = new WS('@routes.HomeController.webSocket().webSocketURL(request)');
 
@@ -30,7 +27,8 @@
     };
 
     $(document).ready(function () {
-        console.log("Production Mode");
+        console.log("@adress");
+        console.log("Development mode");
         socket.onmessage = writeMessages;
         var gamefield = $("#gamefield");
         for (var i = 1; i <= 24; i++) {
@@ -81,3 +79,4 @@
             }, interval);
         }
     };
+</script>

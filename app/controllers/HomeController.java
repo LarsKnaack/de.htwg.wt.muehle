@@ -5,6 +5,7 @@ import akka.actor.ActorSystem;
 import akka.actor.Props;
 import akka.stream.Materializer;
 import com.google.inject.Inject;
+import com.typesafe.config.ConfigValue;
 import models.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,11 +17,15 @@ import play.mvc.Result;
 import play.mvc.Security;
 import play.mvc.WebSocket;
 import play.routing.JavaScriptReverseRouter;
+import scala.Option;
+import scala.collection.immutable.Set;
 import service.RestService;
 import services.AuthenticatorService;
 import services.UserService;
 import views.html.index;
 
+import java.util.Arrays;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -78,10 +83,7 @@ public class HomeController extends Controller {
     /****************************** Utility Methods ****************************************/
 
     public Result webSocketJS() {
-        if(Play.current().isProd()) {
-            return ok(views.js.webSocketProd.render());
-        }
-        return ok(views.js.webSocket.render());
+        return ok(views.html.webSocket.render(Play.current().asJava().config().getString("play.server.http.address")));
     }
 
     public WebSocket webSocket() {
