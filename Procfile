@@ -1,1 +1,1 @@
-web: target/universal/stage/bin/htwg-morris -Dconfig.resource=application.prod.conf -Dhttps.port=9043
+web: target/universal/stage/bin/htwg-morris -Dconfig.resource=application.prod.conf
