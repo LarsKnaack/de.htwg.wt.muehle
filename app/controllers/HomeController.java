@@ -6,6 +6,9 @@ import akka.actor.Props;
 import akka.stream.Materializer;
 import com.google.inject.Inject;
 import models.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import play.api.Play;
 import play.libs.streams.ActorFlow;
 import play.libs.ws.WSClient;
 import play.mvc.Controller;
@@ -75,6 +78,9 @@ public class HomeController extends Controller {
     /****************************** Utility Methods ****************************************/
 
     public Result webSocketJS() {
+        if(Play.current().isProd()) {
+            return ok(views.js.webSocketProd.render());
+        }
         return ok(views.js.webSocket.render());
     }
 

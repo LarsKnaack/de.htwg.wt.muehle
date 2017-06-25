@@ -4,7 +4,7 @@
     // get websocket class, firefox has a different way to get it
 
     var WS = window['MozWebSocket'] ? window['MozWebSocket'] : WebSocket;
-    var socket = new WS('ws://localhost:9000/ws');
+    var socket = new WS('wss://localhost:9043/ws');
 
 
     var poly_list = {};
@@ -30,7 +30,7 @@
     };
 
     $(document).ready(function () {
-        console.log("Development mode");
+        console.log("Production Mode");
         socket.onmessage = writeMessages;
         var gamefield = $("#gamefield");
         for (var i = 1; i <= 24; i++) {
