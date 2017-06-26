@@ -1,4 +1,3 @@
-@(adress: String)
 <script>
     var WS = window['MozWebSocket'] ? window['MozWebSocket'] : WebSocket;
     var socket = new WS('@routes.HomeController.webSocket().webSocketURL(request)');
@@ -27,7 +26,6 @@
     };
 
     $(document).ready(function () {
-        console.log("@adress");
         console.log("Development mode");
         socket.onmessage = writeMessages;
         var gamefield = $("#gamefield");

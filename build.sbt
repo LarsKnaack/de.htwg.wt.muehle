@@ -2,14 +2,14 @@ name := "htwg-morris"
 
 version := "1.0-SNAPSHOT"
 
+lazy val muehle = project
+
 lazy val root = (project in file("."))
   .enablePlugins(PlayJava)
   //TODO: Reenable Filters after implementation
   .disablePlugins(PlayFilters)
-  .aggregate(lib)
-  .dependsOn(lib)
-
-lazy val lib = project
+  .aggregate(muehle)
+  .dependsOn(muehle)
 
 scalaVersion := "2.11.11"
 

@@ -5,10 +5,7 @@ import akka.actor.ActorSystem;
 import akka.actor.Props;
 import akka.stream.Materializer;
 import com.google.inject.Inject;
-import com.typesafe.config.ConfigValue;
 import models.User;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import play.api.Play;
 import play.libs.streams.ActorFlow;
 import play.libs.ws.WSClient;
@@ -17,15 +14,9 @@ import play.mvc.Result;
 import play.mvc.Security;
 import play.mvc.WebSocket;
 import play.routing.JavaScriptReverseRouter;
-import scala.Option;
-import scala.collection.immutable.Set;
 import service.RestService;
 import services.AuthenticatorService;
 import services.UserService;
-import views.html.index;
-
-import java.util.Arrays;
-import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -53,7 +44,7 @@ public class HomeController extends Controller {
     @Security.Authenticated(AuthenticatorService.class)
     public Result index() {
         if (null != session("google")) {
-            return ok(index.render(theme));
+            return ok(views.html.index.render(theme));
         }
         String email = session("email");
         Optional<User> user = userService.getUserByMail(email);
@@ -61,7 +52,7 @@ public class HomeController extends Controller {
             session().clear();
             return LOGIN;
         }
-        return ok(index.render(theme));
+        return ok(views.html.index.render(theme));
     }
 
     @Security.Authenticated(AuthenticatorService.class)
@@ -83,7 +74,7 @@ public class HomeController extends Controller {
     /****************************** Utility Methods ****************************************/
 
     public Result webSocketJS() {
-        return ok(views.html.webSocket.render(Play.current().asJava().config().getString("play.server.http.address")));
+        return ok(views.html.webSocket.render());
     }
 
     public WebSocket webSocket() {
