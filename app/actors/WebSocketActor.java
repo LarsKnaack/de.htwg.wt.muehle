@@ -5,7 +5,11 @@ import akka.actor.UntypedAbstractActor;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import controllers.routes;
 import play.libs.ws.WSClient;
+import play.mvc.Call;
+import play.mvc.Result;
+import play.mvc.Results;
 import service.Endpoints;
 
 import java.util.LinkedList;
@@ -36,28 +40,17 @@ public class WebSocketActor extends UntypedAbstractActor {
         if (type.equals("chat") || type.equals("log")) {
             broadcastMessage(jsonNode);
         } else if (type.equals("update")) {
-            processMessage(Endpoints.UPDATE);
+            //processMessage(routes.RestController.update());
         } else if (type.equals("input")) {
             String url = Endpoints.HANDLE_INPUT + jsonNode.get("data").asInt();
-            processMessage(url);
+            //processMessage(routes.RestController.
+              //      handleInput(jsonNode.get("data").asInt()));
         }
     }
 
-    private void processMessage(String url) {
-        ObjectNode objectNode = mapper.createObjectNode();
-        client.url(url).get()
-                .thenAcceptAsync((wsResponse) -> {
-                    int status = wsResponse.getStatus();
-                    if (200 <= status && status < 300) {
-                        objectNode.put("type", "update");
-                        objectNode.setAll((ObjectNode) wsResponse.asJson());
-                    } else {
-                        objectNode.put("type", "error");
-                        objectNode.put("data",
-                                String.format("%d: %s", wsResponse.getStatus(), wsResponse.getStatusText()));
-                    }
-                    broadcastMessage(objectNode);
-                });
+    private void processMessage(Call call) {
+        Result result = Results.redirect(call);
+        System.out.println(result.body().toString());
     }
 
     private void broadcastMessage(JsonNode jsonNode) {

@@ -21,6 +21,9 @@ POST        /googleLogin/:email        controllers.AuthenticationController.goog
 
 POST        /theme/:theme              controllers.HomeController.setTheme(theme:String)
 
+#Child routes
+->          /morris                    morris.Routes
+
 # Map static resources from the /public folder to the /assets URL path
 GET         /assets/*file              controllers.Assets.versioned(path="/public", file: Asset)
 GET         /webSocket.js              controllers.HomeController.webSocketJS
