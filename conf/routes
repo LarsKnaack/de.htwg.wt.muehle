@@ -22,6 +22,8 @@ POST        /googleLogin/:email        controllers.AuthenticationController.goog
 POST        /theme/:theme              controllers.HomeController.setTheme(theme:String)
 
 #Child routes
+GET         /update                    controllers.RestController.update
+GET         /handleInput/:id           controllers.RestController.handleInput(id: Int)
 ->          /morris                    morris.Routes
 
 # Map static resources from the /public folder to the /assets URL path

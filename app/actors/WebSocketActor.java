@@ -8,8 +8,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import controllers.routes;
 import play.libs.ws.WSClient;
 import play.mvc.Call;
-import play.mvc.Result;
-import play.mvc.Results;
+import play.mvc.Http;
 import service.Endpoints;
 
 import java.util.LinkedList;
@@ -43,14 +42,28 @@ public class WebSocketActor extends UntypedAbstractActor {
             //processMessage(routes.RestController.update());
         } else if (type.equals("input")) {
             String url = Endpoints.HANDLE_INPUT + jsonNode.get("data").asInt();
-            //processMessage(routes.RestController.
-              //      handleInput(jsonNode.get("data").asInt()));
+            processMessage(routes.RestController.
+                    handleInput(jsonNode.get("data").asInt()));
         }
     }
 
     private void processMessage(Call call) {
-        Result result = Results.redirect(call);
-        System.out.println(result.body().toString());
+        String url = call.url();
+        System.out.println(url);
+        ObjectNode objectNode = mapper.createObjectNode();
+        client.url(url).get()
+                .thenAcceptAsync((wsResponse) -> {
+                    int status = wsResponse.getStatus();
+                    if (200 <= status && status < 300) {
+                        objectNode.put("type", "update");
+                        objectNode.setAll((ObjectNode) wsResponse.asJson());
+                    } else {
+                        objectNode.put("type", "error");
+                        objectNode.put("data",
+                                String.format("%d: %s", wsResponse.getStatus(), wsResponse.getStatusText()));
+                    }
+                    broadcastMessage(objectNode);
+                });
     }
 
     private void broadcastMessage(JsonNode jsonNode) {

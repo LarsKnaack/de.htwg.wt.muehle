@@ -95,7 +95,8 @@ public class HomeController extends Controller {
                 JavaScriptReverseRouter.create("jsRoutes",
                         routes.javascript.HomeController.setTheme(),
                         routes.javascript.AuthenticationController.googleLogin(),
-                        routes.javascript.AuthenticationController.logout()))
+                        routes.javascript.AuthenticationController.logout(),
+                        routes.javascript.RestController.handleInput()))
                 .as("text/javascript");
     }
 

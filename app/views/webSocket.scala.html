@@ -1,3 +1,7 @@
+@helper.javascriptRouter("jsRoutes")(
+    routes.javascript.RestController.handleInput
+)
+
 <script>
     var WS = window['MozWebSocket'] ? window['MozWebSocket'] : WebSocket;
     var socket = new WS('@routes.HomeController.webSocket().webSocketURL(request)');
@@ -11,13 +15,7 @@
         if (json["type"] === "chat") {
             $('#chat-messages').prepend('<p>' + json["data"] + '</p>');
         } else if (json["type"] === "update") {
-            var data = json["gamefield"];
-            for (var x = 1; x <= data.length; x++) {
-                poly_list[x.toString()].setAttribute("color", data.charAt(x - 1));
-            }
-            Polymer.updateStyles();
-            var info = $("#playerinfo");
-            info.html("Player 1: " + json["stones"]["Player1"] + "<br>" + "Player 2: " + json["stones"]["Player2"]);
+            updateGamefield(json);
         } else if (json["type"] == "log") {
             console.log("Got Log: " + json["data"]);
             var log_container = $("#log-container");
@@ -38,7 +36,12 @@
             $(div).addClass("mills_fields" + i)
                 .appendTo(gamefield);
             poly_elem.onclick = function () {
-                sendMessage("input", this.getAttribute("vertex"));
+                //call get method directly
+                console.log(JSON.parse(this.getAttribute("vertex")));
+                var vertex = JSON.stringify(this.getAttribute("vertex"));
+                $.get('/handleInput/' + this.getAttribute("vertex"), function (data) {
+                    updateGamefield(data);
+                });
             };
         }
 
@@ -53,7 +56,17 @@
         });
 
         sendMessage("update", "");
-    })
+    });
+
+    function updateGamefield(json) {
+        var data = json["gamefield"];
+        for (var x = 1; x <= data.length; x++) {
+            poly_list[x.toString()].setAttribute("color", data.charAt(x - 1));
+        }
+        Polymer.updateStyles();
+        var info = $("#playerinfo");
+        info.html("Player 1: " + json["stones"]["Player1"] + "<br>" + "Player 2: " + json["stones"]["Player2"]);
+    }
 
     function sendMessage(type, data) {
         var message = {"type": type, "data": data};
