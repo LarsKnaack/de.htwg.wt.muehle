@@ -46,7 +46,7 @@
                 //call get method directly
                 console.log(JSON.parse(this.getAttribute("vertex")));
                 var vertex = JSON.stringify(this.getAttribute("vertex"));
-                $.get('/handleInput/' + this.getAttribute("vertex"), function (data) {
+                $.get('@routes.RestController.jsInput()' +"/" + this.getAttribute("vertex"), function (data) {
                     updateGamefield(data);
                 });
             };
