@@ -2,12 +2,12 @@ name := "htwg-morris"
 
 version := "1.0-SNAPSHOT"
 
-lazy val muehle = project
+lazy val muehle = project.enablePlugins(PlayEnhancer)
 
 lazy val root = (project in file("."))
   .enablePlugins(PlayJava)
   //TODO: Reenable Filters after implementation
-  .disablePlugins(PlayFilters)
+  .disablePlugins(PlayFilters, PlayEnhancer)
   .aggregate(muehle)
   .dependsOn(muehle)
 
@@ -15,6 +15,7 @@ scalaVersion := "2.11.11"
 
 libraryDependencies ++= Seq(
   javaJdbc,
+  evolutions,
   ehcache,
   guice,
   openId,
