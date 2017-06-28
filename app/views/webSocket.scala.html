@@ -4,10 +4,17 @@
 
 <script>
     var WS = window['MozWebSocket'] ? window['MozWebSocket'] : WebSocket;
-    var socket = new WS('@routes.HomeController.webSocket().webSocketURL(request)');
+    var route = '@routes.HomeController.webSocket()';
+    console.log(wsUrl(route));
+    var socket = new WS(wsUrl(route));
 
 
     var poly_list = {};
+
+    function wsUrl(s) {
+        var l = window.location;
+        return ((l.protocol === "https:") ? "wss://" : "ws://") + l.host + s;
+    }
 
     var writeMessages = function (event) {
         var json = JSON.parse(event.data);
@@ -39,7 +46,7 @@
                 //call get method directly
                 console.log(JSON.parse(this.getAttribute("vertex")));
                 var vertex = JSON.stringify(this.getAttribute("vertex"));
-                $.get('/handleInput/' + this.getAttribute("vertex"), function (data) {
+                $.get('@routes.RestController.jsInput()' + this.getAttribute("vertex"), function (data) {
                     updateGamefield(data);
                 });
             };
@@ -54,8 +61,9 @@
                 $(this).val('');
             }
         });
-
-        sendMessage("update", "");
+        $.get('@routes.RestController.update()',function (data) {
+            updateGamefield(data);
+        });
     });
 
     function updateGamefield(json) {

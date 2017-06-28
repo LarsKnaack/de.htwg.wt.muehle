@@ -6,7 +6,6 @@ import akka.actor.Props;
 import akka.stream.Materializer;
 import com.google.inject.Inject;
 import models.User;
-import play.api.Play;
 import play.libs.streams.ActorFlow;
 import play.libs.ws.WSClient;
 import play.mvc.Controller;
@@ -17,6 +16,7 @@ import play.routing.JavaScriptReverseRouter;
 import service.RestService;
 import services.AuthenticatorService;
 import services.UserService;
+
 import java.util.Optional;
 
 /**

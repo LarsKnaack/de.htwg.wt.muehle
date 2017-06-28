@@ -23,6 +23,8 @@ POST        /theme/:theme              controllers.HomeController.setTheme(theme
 
 #Child routes
 GET         /update                    controllers.RestController.update
+GET         /reset                     controllers.RestController.reset
+GET         /handleInput/              controllers.RestController.jsInput
 GET         /handleInput/:id           controllers.RestController.handleInput(id: Int)
 ->          /morris                    morris.Routes
 
